@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS Skills (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(64)
+);
