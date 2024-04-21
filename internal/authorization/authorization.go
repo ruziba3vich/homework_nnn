@@ -7,7 +7,7 @@ import (
 	"github.com/ruziba3vich/blog-app/internal/authentication"
 )
 
-func Authorize(username, password, role string, db *sql.DB) (string, error) {
+func AuthorizeService(username, password, role string, db *sql.DB) (string, error) {
 	hashedPassword, err := authentication.HashPassword(password)
 	if err != nil {
 		return "", err

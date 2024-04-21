@@ -1,7 +1,13 @@
 package models
 
+import (
+	"time"
+)
+
 type EmailBox struct {
-	UserId     int    `json:"user_id"`
-	EmployerId int    `json:"employer_id"`
-	Contenet   string `json:"content"`
+	Id      int       `json:"id"`
+	To      User      `json:"user_id"`
+	From    User      `json:"employer_id"`
+	Content string    `json:"content"`
+	SentOn  time.Time `json:"sent_on"`
 }

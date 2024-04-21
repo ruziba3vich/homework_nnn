@@ -7,7 +7,7 @@ import (
 	"github.com/ruziba3vich/blog-app/internal/models"
 )
 
-func Register(user models.User, db *sql.DB) (string, error) {
+func RegisterService(user models.User, db *sql.DB) (string, error) {
 	hashedPassword, err := authentication.HashPassword(user.Password)
 	if err != nil {
 		return "", err

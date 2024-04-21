@@ -9,4 +9,5 @@ type User struct {
 	Country  string `json:"country"`
 	City     string `json:"city"`
 	Role     string `json:"role"`
+	EmailBox []EmailBox
 }
