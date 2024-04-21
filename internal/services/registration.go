@@ -8,17 +8,19 @@ import (
 )
 
 func Register(user models.User, db *sql.DB) (string, error) {
-	query := "INSERT INTO users(username, fullname, email, country, city) VALUES ($1, $2, $3, $4, $5);"
-	var erro error
-	user.Password, erro = authentication.HashPassword(user.Password)
-	if erro != nil {
-		return "", erro
-	}
-	if _, err := db.Exec(query, user.Username, user.Fullname, user.Email, user.Country, user.City); err != nil {
+	hashedPassword, err := authentication.HashPassword(user.Password)
+	if err != nil {
 		return "", err
 	}
-	db.QueryRow("SELECT id FROM Users WHERE username = $1", user.Username).Scan(&user.ID)
-	token, err := authentication.GenerateJWTToken(user.ID, user.Username)
+
+	query := "INSERT INTO users(username, fullname, email, password, country, city) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id"
+	var userID int
+	err = db.QueryRow(query, user.Username, user.Fullname, user.Email, hashedPassword, user.Country, user.City).Scan(&userID)
+	if err != nil {
+		return "", err
+	}
+
+	token, err := authentication.GenerateJWTToken(userID, user.Username)
 	if err != nil {
 		return "", err
 	}

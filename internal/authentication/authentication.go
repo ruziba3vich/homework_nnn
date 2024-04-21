@@ -44,7 +44,7 @@ func ValidateJWTToken(tokenString string) (string, error) {
 }
 
 func GetUserByID(userId int) (int, string, error) {
-	userData, ok := users[userId]
+	userData, ok := Users[userId]
 	if ok {
 		return userId, userData[1], nil
 	}

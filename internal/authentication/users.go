@@ -2,7 +2,7 @@ package authentication
 
 import "database/sql"
 
-var users map[int][]string
+var Users map[int][]string
 
 func GetUserMap(db *sql.DB) {
 	rows, err := db.Query("SELECT id, username, fullname, email, country, city FROM Users")
@@ -20,7 +20,7 @@ func GetUserMap(db *sql.DB) {
 			return
 		}
 		userInfo := []string{fullname, username, email, country, city}
-		users[id] = userInfo
+		Users[id] = userInfo
 	}
 
 	if err := rows.Err(); err != nil {
