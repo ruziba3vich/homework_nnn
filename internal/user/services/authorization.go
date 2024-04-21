@@ -7,7 +7,7 @@ import (
 	"github.com/ruziba3vich/blog-app/internal/authentication"
 )
 
-func Authorize(username, password string, db *sql.DB) (string, error) {
+func Authorize(username, password, role string, db *sql.DB) (string, error) {
 	hashedPassword, err := authentication.HashPassword(password)
 	if err != nil {
 		return "", err
@@ -22,7 +22,7 @@ func Authorize(username, password string, db *sql.DB) (string, error) {
 		return "", err
 	}
 
-	token, err := authentication.GenerateJWTToken(id, username)
+	token, err := authentication.GenerateJWTToken(id, username, role)
 	if err != nil {
 		return "", errors.New("could not generate token")
 	}

@@ -8,4 +8,5 @@ type User struct {
 	Password string `json:"password"`
 	Country  string `json:"country"`
 	City     string `json:"city"`
+	Role     string `json:"role"`
 }

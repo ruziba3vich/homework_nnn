@@ -35,7 +35,7 @@ func ValidateJWTToken(tokenString string) (string, error) {
 		return "", err
 	}
 
-	newToken, err := GenerateJWTToken(userID, username)
+	newToken, err := GenerateJWTToken(userID, username, claims.Role)
 	if err != nil {
 		return "", err
 	}
@@ -43,10 +43,11 @@ func ValidateJWTToken(tokenString string) (string, error) {
 	return newToken, nil
 }
 
-func GetUserByID(userId int) (int, string, error) {
-	userData, ok := Users[userId]
-	if ok {
-		return userId, userData[1], nil
+func GetUserByID(userID int) (int, string, error) {
+	userData, ok := Users[userID]
+	if !ok {
+		return -1, "", errors.New("user not exists")
 	}
-	return -1, "", errors.New("user not exists")
+
+	return userID, userData[1], nil
 }

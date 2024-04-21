@@ -5,5 +5,6 @@ CREATE TABLE IF NOT EXISTS Users (
     email VARCHAR(64),
     password VARCHAR(64),
     country VARCHAR(50),
-    city VARCHAR(50)
+    city VARCHAR(50),
+    role VARCHAR(8)
 );
