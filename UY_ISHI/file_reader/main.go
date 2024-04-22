@@ -9,6 +9,7 @@ package main
 import (
 	"fmt"
 	"io"
+	"log"
 	"os"
 	"sync"
 )
@@ -18,14 +19,14 @@ func readFile(filename string, wg *sync.WaitGroup, ch chan<- string) {
 
 	file, err := os.Open(filename)
 	if err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
 		return
 	}
 	defer file.Close()
 
 	content, err := io.ReadAll(file)
 	if err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
 		return
 	}
 
